@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Programación avanzada en R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Creative Commons Attribution 4.0 International License" />
+    <script src="taller_intro_files/clipboard/clipboard.min.js"></script>
+    <link href="taller_intro_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="taller_intro_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Programación avanzada en R
+## Escuela de Invierno - Julio 2021 <br> Gabriela Mathieu
+### <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+
+---
+
+
+
+
+
+
+
+# ¿Qué haremos hoy?
+
+- Características y  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;objetivos&lt;/span&gt; del curso
+
+- Repaso de conceptos de  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;R Base&lt;/span&gt; 
+
+- Trabajo en proyecto (&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;.RProj&lt;/span&gt;)
+
+- ¿Qué es  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;git&lt;/span&gt;? ¿Qué es  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;GitLab&lt;/span&gt;?
+
+- Crear una cuenta de GitLab
+
+- Configuración de git
+
+
+---
+class: hide-logo
+# Características del curso
+
+
+
+.left-column[
+&lt;br&gt;
+
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"/></svg>
+&lt;br&gt;&lt;br&gt;
+
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg>
+&lt;br&gt;&lt;br&gt;
+
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+&lt;br&gt;&lt;br&gt;
+
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>
+&lt;br&gt;&lt;br&gt;
+
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M416 192c0-88.4-93.1-160-208-160S0 103.6 0 192c0 34.3 14.1 65.9 38 92-13.4 30.2-35.5 54.2-35.8 54.5-2.2 2.3-2.8 5.7-1.5 8.7S4.8 352 8 352c36.6 0 66.9-12.3 88.7-25 32.2 15.7 70.3 25 111.3 25 114.9 0 208-71.6 208-160zm122 220c23.9-26 38-57.7 38-92 0-66.9-53.5-124.2-129.3-148.1.9 6.6 1.3 13.3 1.3 20.1 0 105.9-107.7 192-240 192-10.8 0-21.3-.8-31.7-1.9C207.8 439.6 281.8 480 368 480c41 0 79.1-9.2 111.3-25 21.8 12.7 52.1 25 88.7 25 3.2 0 6.1-1.9 7.3-4.8 1.3-2.9.7-6.3-1.5-8.7-.3-.3-22.4-24.2-35.8-54.5z"/></svg>
+
+]
+
+.right-column[
+
+Espacio "presencial": &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;20 horas&lt;/span&gt; de clases teóricas/prácticas
+&lt;br&gt;&lt;br&gt;
+
+[Webasignatura](https://webasignatura.ucu.edu.uy/course/view.php?id=6789) y [Slack](https://join.slack.com/t/programacinav-yrb6242/shared_invite/zt-t7merh74-YnvB_hva2POQOGByIQTObg)
+&lt;br&gt;&lt;br&gt;
+
+Participar durante la clase a través del &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;chat&lt;/span&gt; de zoom/slack o &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pedir la palabra&lt;/span&gt;.
+&lt;br&gt;&lt;br&gt;
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Examen&lt;/span&gt; opcional
+&lt;br&gt;&lt;br&gt;
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Dedicación:&lt;/span&gt; durante el curso y después ... es la .red[clave]
+]
+
+---
+# Objetivos
+
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+![](https://media.giphy.com/media/RbDKaczqWovIugyJmW/giphy.gif)
+]
+
+.right-column[
+
+- Profundizar en la &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;programación&lt;/span&gt; en R para &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;ciencia de datos&lt;/span&gt;.
+&lt;br&gt;
+
+- Aprender &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;buenas prácticas&lt;/span&gt; de escribir código (R/RStudio), &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;trabajo colaborativo&lt;/span&gt; y &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;reproducibilidad&lt;/span&gt; del código.
+&lt;br&gt;
+
+- Aprender a escribir &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;funciones propias&lt;/span&gt; y documentarlas.
+&lt;br&gt;
+
+- Aprender a usar el &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;control de versiones&lt;/span&gt; (Git/GitLab). 
+&lt;br&gt;
+
+- Usaremos &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;varios conjuntos de datos&lt;/span&gt; para abordar diferentes problemas.
+]
+
+
+---
+# Ciencia de datos
+
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+![](https://media.giphy.com/media/aQCCNezRpb9Hq/giphy.gif)
+
+]
+
+.right-column[
+
+- Disciplina que combina &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;matemática&lt;/span&gt;, &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;programación&lt;/span&gt;, &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;estadística&lt;/span&gt;, entre otras, para trabajar con grandes vólumenes de &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;datos&lt;/span&gt;.  
+
+- Implica el procesamiento, limpieza, análisis de datos y la publicación de resultados.
+
+- Al final del curso habrás aprendido a usar un gran conjunto de herramientas para limpiar y transformar tus datos así como hacer tus propios desarrollos en R.
+
+- R provee el paquete Tidyverse que es una colección de paquetes que abarcan todo el flujo de trabajo de la ciencia de datos.
+
+&lt;!-- - Bajo la lógica tidyverse nuestros datos deben estar en un formato tidy. Esto implica que cada variable se encuentre en una columna, cada observación en una fila y en cada "celda" un solo valor. --&gt;
+
+]
+
+---
+# Ecosistema de la Ciencia de Datos
+
+&lt;img src="http://hexb.in/hexagons/rstudio.png" width="14%" /&gt;&lt;img src="http://hexb.in/hexagons/roxygen2.png" width="14%" /&gt;&lt;img src="http://hexb.in/hexagons/devtools.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/usethis.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/testthat.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/glue.png" width="14%" /&gt;&lt;img src="http://hexb.in/vector/magrittr.svg" width="14%" /&gt;
+
+&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyverse.png" width="14%" /&gt;&lt;img src="http://hexb.in/hexagons/readr.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="14%" /&gt;&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/lubridate.png" width="14%" /&gt;
+&lt;br&gt;&lt;br&gt;
+**Es solo una parte ...**
+
+---
+# Pre-requisitos
+
+Instalar las versiones más recientes de R (&gt;= 3.6.3), RStudio y Git
+
+.left-column[
+&lt;!-- 👍 --&gt;
+&lt;!-- 👎 --&gt;
+
+&lt;img src="img/r_logo.png" width="30%" /&gt;
+
+
+&lt;img src="img/rstudio_logo.png" width="55%" /&gt;
+
+
+&lt;img src="img/git_logo.png" width="45%" /&gt;
+
+&lt;img src="img/gitlab_logo.png" width="65%" /&gt;
+
+]
+
+.right-column[
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;R&lt;/span&gt;: https://cloud.r-project.org
+&lt;br&gt;
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;RStudio&lt;/span&gt;: http://www.rstudio.com/download
+&lt;br&gt;&lt;br&gt;
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Git&lt;/span&gt;: https://git-scm.com/downloads 
+&lt;br&gt;
+
+- Crear una cuenta de &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;GitLab&lt;/span&gt;: lo haremos en un rato.
+
+]
+
+
+---
+class: inverse, center, middle
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 9% 15%
+background-size: 95px
+# R Base 
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Objetos
+
+.pull-left[Un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;vector&lt;/span&gt; contiene elementos individuales (números o caracteres) del mismo tipo.
+
+Un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;data frame&lt;/span&gt; contiene vectores del mismo largo pero eventualmente de diferente clase.
+
+Una &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;matriz&lt;/span&gt; contiene vectores del mismo largo y de la misma clase.
+
+Una &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;lista&lt;/span&gt; contiene varios objetos de cualquier clase (data frame, vectores, etc.) juntos.
+]
+
+.pull-right[
+
+![](img/intro/object_type.png)
+
+&lt;!-- La cantidad de clases de objetos es muy grande y crece permanentemente a medida que se crean nuevos paquetes que tienen sus propias clases. --&gt;
+]
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Ejemplos de objetos 
+
+
+```r
+vec_numerico &lt;- c(1, 0, 1, 1, 1, 0) # vector numérico
+```
+--
+
+```r
+vec_caracter &lt;- c("1", "0", "1", "1", "1", "0") # vector caracter
+```
+--
+
+```r
+vec_logico &lt;- c(T, F, T, T, T, F) # vector lógico
+```
+--
+
+```r
+vec_factor &lt;- factor(vec_caracter, levels = c(1,0), labels = c('Sı', 'No')) # factor
+```
+--
+
+```r
+matriz_numerica &lt;- matrix(vec_numerico, nrow = 3) # matriz numérica
+```
+--
+
+```r
+matriz_caracter &lt;- matrix(vec_caracter, nrow = 3) # matriz numérica
+```
+--
+
+```r
+df &lt;- data.frame(vec_numerico, vec_caracter) # marco de datos, data frame
+```
+--
+
+```r
+lista &lt;- list(vec_logico, matriz_numerica, df) # lista
+```
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Clase  y tipo de objeto
+
+.pull-left[
+- Todos los objetos en R tienen una &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;clase&lt;/span&gt;, la cual define &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;que información contiene y como usarlo&lt;/span&gt;. 
+
+- La función &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;class()&lt;/span&gt; nos dice la clase de un objeto.
+
+- Cada objeto en R tiene un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;tipo&lt;/span&gt;. El tipo define &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;como es almacenado&lt;/span&gt; el objeto en R.
+
+- Podemos conocer el tipo de objeto con la función &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;typeof()&lt;/span&gt;
+
+]
+
+.pull-right[
+
+```r
+class(vec_numerico)
+```
+
+```
+[1] "numeric"
+```
+
+```r
+typeof(vec_numerico)
+```
+
+```
+[1] "double"
+```
+
+```r
+class(matriz_caracter)
+```
+
+```
+[1] "matrix" "array" 
+```
+
+```r
+typeof(matriz_caracter)
+```
+
+```
+[1] "character"
+```
+
+]
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Acceder a elementos 
+
+
+| Sintaxis |	Objetos | 	Descripción|
+|----------|----------|--------------|
+| `x[i]` 	| Vectores, Listas |	Selecciona elementos del objeto x, descritos en i. i puede ser un vector de tipo integer, chararacter (de nombres de los objetos) o lógico. Cuando es usado con listas, devuelve una lista. Cuando es usado en vectores devuelve un vector.|
+| `x[[i]]` |	Listas 	| Devuelve un único elemento de x que se encuentra en la posición i. i puede ser un vector de tipo integer o character de longitud 1.|
+| `x$name` 	|Listas, Dataframes |	Devuelve un objeto con nombre name del objeto x.|
+| `x[i, j]` | 	Matrices, Dataframes |	Devuelve el objeto de la fila i y columna j. i y j pueden ser un vector de tipo integer o chararacter (de nombres de los objetos)|
+
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Acceder a elementos de un vector [ ]
+
+
+```r
+x &lt;- 3:8
+x
+```
+
+```
+[1] 3 4 5 6 7 8
+```
+
+
+
+| Objeto | Acceso | Resultado| Descripción |
+|--------|--------|----------|-------------|
+| vector | `x[2]` |  4| un elemento |
+| vector |  `x[1:2]`| 3, 4| dos elementos consecutivos |
+| vector |  `x[c(1, 3)]`| 3, 5| dos elementos no consecutivos |
+| vector |  `x[-2]`| 3, 5, 6, 7, 8| todos menos un elemento |
+| vector |  `x[-c(2, 4)]`| 3, 5, 7, 8| todos menos dos elementos |
+| vector |  `x[x &gt; 5]`| 6, 7, 8| elementos que cumplen condición |
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Operadores de comparación, lógicos y especiales
+
+.pull-left[
+
+- Menor que: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;&amp;lt;&lt;/span&gt;
+
+- Mayor que: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;&amp;gt;&lt;/span&gt;
+
+- Igual a: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;==&lt;/span&gt;
+
+- Menor o igual a: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;&amp;lt;=&lt;/span&gt;
+
+- Mayor o igual a: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;&amp;gt;=&lt;/span&gt;
+
+- Distintio a: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;!=&lt;/span&gt;
+
+]
+
+.pull-right[
+
+
+- Y lógico: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;&amp;amp;&lt;/span&gt;
+
+- O lógico: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;|&lt;/span&gt;
+
+- No lógico &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;!&lt;/span&gt;
+
+- Pertenece a: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;%in%&lt;/span&gt;
+
+
+]
+&lt;!-- any() Cualquiera verdadero --&gt;
+&lt;!-- all() Todos verdaderos --&gt;
+
+
+&lt;!-- --- --&gt;
+&lt;!-- background-image: url("http://hexb.in/hexagons/offline-trex.png") --&gt;
+&lt;!-- background-position: 95% 9% --&gt;
+&lt;!-- background-size: 55px --&gt;
+&lt;!-- # Acceder a elementos de una matriz [ , ] --&gt;
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Data frame
+
+Creo un data frame con 3 vectores 
+
+```r
+atleta &lt;- c("DÉBORAH RODRÍGUEZ", "EMILIANO LASA", "PÍA FERNÁNDEZ", "MIKAEL APRAHAMIÁN",
+            "NICOLE FRANK", "ENZO MARTÍNEZ", "BRUNO CETRARO", "FELIPE KLÜVER", "DOLORES MOREIRA",
+            "PABLO DEFAZIO", "DOMINIQUE KNÜPPEL")
+
+debut &lt;- c("29/7","31/7","01/8", "26/7", "26/7", "30/7", "23/7", "23/7", "25/7", "28/7", "28/7")
+
+rio_jjoo &lt;- c(T, T, F, F, F, F, F, F, T, T, F)
+
+df_uy &lt;- data.frame(atleta, debut, rio_jjoo)
+
+head(df_uy)
+```
+
+```
+             atleta debut rio_jjoo
+1 DÉBORAH RODRÍGUEZ  29/7     TRUE
+2     EMILIANO LASA  31/7     TRUE
+3     PÍA FERNÁNDEZ  01/8    FALSE
+4 MIKAEL APRAHAMIÁN  26/7    FALSE
+5      NICOLE FRANK  26/7    FALSE
+6     ENZO MARTÍNEZ  30/7    FALSE
+```
+
+---
+# Acceder a elementos de un data frame [, ]
+
+.pull-left[
+Accedo a los elementos de la primera columna ("atleta"):
+
+
+```r
+df_uy[, 1]
+df_uy$atleta
+df_uy[,"atleta"]
+df_uy[["atleta"]]
+```
+
+]
+.pull-right[
+Accedo al primer elemento de la primera columna ("atleta")
+
+```r
+df_uy[1, 1]
+df_uy$atleta[1]
+df_uy[1,"atleta"]
+df_uy[["atleta"]][1]
+```
+
+
+```
+[1] "DÉBORAH RODRÍGUEZ"
+```
+]
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Lista
+
+.pull-left[
+
+
+```r
+evento &lt;- "JJOO Tokyo 2021"
+deporte &lt;- c("Atletismo", "Judo", "Natación",
+             "Remo", "Vela")
+lista_uy &lt;- list(df_uy, evento, deporte)
+```
+]
+
+.pull-right[
+
+```r
+lista_uy
+```
+
+```
+[[1]]
+              atleta debut rio_jjoo
+1  DÉBORAH RODRÍGUEZ  29/7     TRUE
+2      EMILIANO LASA  31/7     TRUE
+3      PÍA FERNÁNDEZ  01/8    FALSE
+4  MIKAEL APRAHAMIÁN  26/7    FALSE
+5       NICOLE FRANK  26/7    FALSE
+6      ENZO MARTÍNEZ  30/7    FALSE
+7      BRUNO CETRARO  23/7    FALSE
+8      FELIPE KLÜVER  23/7    FALSE
+9    DOLORES MOREIRA  25/7     TRUE
+10     PABLO DEFAZIO  28/7     TRUE
+11 DOMINIQUE KNÜPPEL  28/7    FALSE
+
+[[2]]
+[1] "JJOO Tokyo 2021"
+
+[[3]]
+[1] "Atletismo" "Judo"      "Natación"  "Remo"      "Vela"     
+```
+
+]
+
+---
+background-image: url("http://hexb.in/hexagons/offline-trex.png")
+background-position: 95% 9%
+background-size: 55px
+# Acceder a elementos de una lista [[]]
+
+
+- La notación &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;[]&lt;/span&gt; extrae una sublista. El resultado será siempre una lista:
+
+- La notación &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;[[]]&lt;/span&gt; extrae un único componente de la lista. Esto es, elimina un nivel en la jerarquía de la lista:
+
+- El operador &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;$&lt;/span&gt; extrae elementos de una lista por medio de su nombre. El funcionamiento es el mismo que con el operador [[]] excepto que no tenemos que utilizar comillas (""):
+
+- La distinción entre [] y [[]] es importante en las listas, puesto que [[]] se mueve jerárquicamente por la lista, mientras que [] devuelve una sublista. 
+
+---
+# Acceder a elementos de una lista 
+
+.pull-left[
+
+```r
+# 1ro y 2do elemento de la lista
+lista_uy[1:2]
+
+
+# 3er elemento de la lista
+lista_uy[3]
+
+# 3er elemento de la lista
+lista_uy[[3]]
+
+# 1er elemento del 3er elemento de la lista.
+lista_uy[[3]][1]
+
+lista_uy[[3]][[1]]
+```
+
+]
+
+.pull-right[
+&lt;img src="img/intro/pepper_list.png" width="459" 200% /&gt;
+&lt;br&gt;&lt;br&gt;
+
+Fuente: https://goo.gl/8UkcHq
+
+]
+
+
+---
+# Datos
+
+
+Comparemos algunas características de R con Stata y SPSS.
+Esta tabla la tomé de [Princeton University](https://imgv2-2-f.scribdassets.com/img/document/353774131/original/365bf63409/1573401036?v=1), la traduje y le agregué el año de creación.
+
+|Características | R | SPSS | Stata |
+|-----------------|-------|----------|----------------|
+| Año | 1993| 1968 | 1985|
+| Curva aprendizaje | Muy empinada | Plana  | Empinada |
+| Interfaz| Programación| Point and click | Programación/Point and click |
+| Manipulación de datos| Avanzada | Moderada | Avanzada |
+| Análisis de datos| Potente/Versátil | Potente | Potente|
+| Gráficos| Excelentes|Muy buenos | Muy buenos |
+|Software libre| 1| 0| 0 |
+|Costo| Gratuito| Muy costoso| Accesible |
+
+---
+# Ejercicio
+
+- Crea vectores de diferente clase para:
+  - los nombres de los programas
+  - año de creación
+  - software libre
+  
+- Crea un data frame con los datos de los vectores anteriores.
+
+- Crea una lista con los objetos creados en los pasos anteriores
+
+- Comprueba la cantidad de elementos y la clase
+
+---
+# Convertir objetos a otra clase
+
+
+.pull-left[
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Consulta&lt;/span&gt;
+
+| Función | Descripción|
+|---------|------------| 
+|`is.numeric()`| ¿es un vector numérico?|
+|`is.character()`| ¿es un vector caracter?|
+|`is.factor()`| ¿es un vector factor?|
+|`is.matrix()`| ¿es una matriz?|
+|`is.data.frame()`| ¿es un data frame?|
+|`is.list()`| ¿es una lista?|
+
+]
+
+.pull-right[
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Convierte&lt;/span&gt; 
+
+| Función | Descripción|
+|---------|------------| 
+|`as.numeric()`| convierte a numérico|
+|`as.character()`| convierte a caracter|
+|`as.factor()`| convierte a factor|
+|`as.matrix()`| convierte a matriz|
+|`as.data.frame()`| convierte a data frame|
+|`as.list()`| convierte a lista|
+
+]
+
+
+---
+# Coerción
+
+Si se combinan elementos de diferente tipo en un mismo objeto R, los reasigna. Si contiene números y texto el vector será de clase `character`.
+
+
+```r
+c(1, 3, "h")
+```
+
+```
+[1] "1" "3" "h"
+```
+
+- La coerción va de lo más restrictivo a lo más flexible:
+
+`logical -&gt; integer -&gt; numeric -&gt; character` 
+
+- Las coerciones no se producen en el orden inverso.
+
+
+- Podemos coercionar un dato de tipo entero a uno numérico, pero no uno de cadena de texto a numérico.
+
+- Este tipo de coerción es implícita y la necesita R para funcionar. 
+
+- También existe la coerción explícita que hacemos con las funciones de tipo as.*().
+
+&lt;!-- Un texto sin comillas en R es un objeto (siempre que cumpla las reglas de un nombre de objeto). --&gt;
+
+&lt;!-- La mayoría de las funciones producen un error cuando el tipo de datos que esperan no coincide con los que pasamos como argumentos.  --&gt;
+
+
+---
+# Vectorización
+
+.pull-left[
+- R &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;vectoriza las operaciones&lt;/span&gt; de manera que si sumo un número a un vector numérico, a cada elemento del vector le sumará ese número.
+
+- Esta propiedad es una ventaja ya que permite evitar loops en muchas de situaciones y de esta manera se obtiene un código más 'limpio' y eficiente.
+
+- El operador  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;:&lt;/span&gt; sirve para generar vectores numéricos de números consecutivos
+
+]
+
+.pull-right[
+
+```r
+*x &lt;- -1:4
+x
+```
+
+```
+[1] -1  0  1  2  3  4
+```
+
+
+```r
+*x + 5 # adiciono 5
+```
+
+```
+[1] 4 5 6 7 8 9
+```
+
+
+```r
+*x * 3 # multiplico por 3
+```
+
+```
+[1] -3  0  3  6  9 12
+```
+
+]
+
+---
+# Funciones descriptivas de un vector numérico
+
+&lt;!-- https://privefl.github.io/advr38book/r-programming.html#useful-r-base-functions --&gt;
+
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;length(x)&lt;/span&gt;: devuelve la cantidad de elementos de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;sort(x, decreasing = F)&lt;/span&gt;: ordena los elementos de manera creciente 
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;sum(x)&lt;/span&gt;: devuelve la suma de los elementos de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;max(x)&lt;/span&gt;: máximo
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;min(x)&lt;/span&gt;: mínimo
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;mean(x)&lt;/span&gt;: promedio aritmético de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;median(x)&lt;/span&gt;: mediana de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;sd(x)&lt;/span&gt;: desvío estándar de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;var(x)&lt;/span&gt;: varianza de x
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;summary(x)&lt;/span&gt;: resumen descriptivo de x (mínimo, máximo, media, mediana, cuartiles)
+
+---
+# Organizar flujo de trabajo
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Organizar&lt;/span&gt; los &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;archivos&lt;/span&gt; en &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;carpetas&lt;/span&gt; y subcarpetas así como definir nombres adecuados es clave para trabajar de manera ordenada y eficiente.
+
+Si tenemos archivos con los datos, scripts y gráficos conviene crear una carpeta por cada una de estas categorías
+
+
+Un adecuado flujo de trabajo se organiza de la siguiente manera:
+- Crear un proyecto (.Rproj)
+- Nombrar los archivos adecuadamente (nombres cortos pero descriptivos, obviar tildes y ñ).
+- Crear carpetas de acuerdo a los archivos que se guardan allí (plots, data, scripts, etc.)
+- Organizar el código/funciones de forma modular
+- Crear archivos diferentes para otros lenguajes
+- Definir una función para cualquier parte del código que uso más de una vez
+
+
+---
+# Trabajar en proyecto (.RProj)
+
+.pull-left[
+
+Permite ordenar los diferentes archivos de un análisis y prescindir de usar setwd() y/o escribir rutas larguísimas o que incluyen tildes o ñ. 
+
+Si el archivo `tesis.Rproj` está ubicado en: `/home/calcita/Escritorio/tesis`, todos los archivos que estén en la carpeta tesis voy a poder cargarlos sin definir una ruta del archivo. 
+
+
+```r
+df &lt;- read_csv("datos.csv")
+```
+
+]
+
+.pull-right[
+&lt;img src="img/intro/fd1.png" width="70%" /&gt;
+
+]
+
+---
+# Crear proyecto
+&lt;img src="img/project/create_project.gif" width="60%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- ![]() --&gt;
+
+---
+# Cargar proyecto
+
+Doble click sobre el archivo .RProj
+
+&lt;img src="img/project/load_project.gif" width="60%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- ![](img/load_project.gif) --&gt;
+---
+# Acceder a archivos del proyecto
+
+Uso la tecla `tab` para autocompletar una ruta 
+
+&lt;img src="img/project/read_project.gif" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: inverse, center, middle
+background-image: url("https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png")
+background-position: 95% 9%
+background-size: 55px
+# Control de versiones
+
+---
+# ¿Qué haremos ahora?
+
+- Software de control de versiones
+--
+
+- Trabajo colaborativo mediante este sistema
+--
+
+- Crear una cuenta en [GitLab](https://gitlab.com/)
+--
+
+- Instalar y configurar Git
+--
+
+- Flujo de trabajo (RStudio - Git - GitLab)
+--
+
+- Crear un repositorio en GitLab
+--
+
+- Crear un nuevo proyecto en RStudio con Git  
+--
+
+- Clonar el repositorio
+--
+
+- Realizar commits y pushs 
+--
+
+- Realizar pulls 
+ 
+
+---
+background-image: url("https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png")
+background-position: 95% 9%
+background-size: 55px
+# ¿Qué es el software de control de versiones?
+
+- Un software de control de versiones te permite llevar un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;control de los cambios&lt;/span&gt; de tus archivos.
+&lt;br&gt;&lt;br&gt;
+--
+
+- El control de versiones está diseñado para gestionar el &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;código fuente&lt;/span&gt;.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Funciona mejor cuando se hace un seguimiento de los archivos almacenados como &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;texto plano&lt;/span&gt; y no codificados como binarios (por ejemplo, documentos de Word). 
+&lt;br&gt;&lt;br&gt;
+--
+
+- Facilita las &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;colaboraciones&lt;/span&gt; de otras personas
+&lt;br&gt;&lt;br&gt;
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Experimentar&lt;/span&gt; con el código y las funciones sin romper el proyecto principal
+&lt;br&gt;&lt;br&gt;
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Etiquetar versiones&lt;/span&gt; concretas para poder volver a ellas fácilmente
+&lt;br&gt;&lt;br&gt;
+--
+
+- Un programa de control de versiones mantiene una copia de los cambios. Esto es útil en caso de que necesitemos revertir algún cambio realizado.  
+
+---
+# Final_final.doc
+
+Probablemente ya has implementado un control de versiones en algún proyecto...
+
+&lt;img src="img/git/tesis.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;!-- - Seguramente ya has implementado un control de versiones en algún proyecto --&gt;
+
+&lt;!-- - Por ejemplo, haciendo una tesis y nombrando por fecha al archivo o por el avance alcanzado hasta acumular decenas de archivos similares.  --&gt;
+
+&lt;!-- - Esto tarde o temprano se convierte en un caos de archivos y nos brinda una falsa seguridad de que podremos recuperar algo que quitamos o cambiamos.  --&gt;
+
+&lt;!-- - ¿En qué versión estará? ¿En la de ayer o hoy de mañana? --&gt;
+
+
+
+---
+# ¿Es como Dropbox o Google Docs?
+
+&lt;!-- **NO! Mejor!** --&gt;
+&lt;center&gt;
+&lt;img src="https://media.giphy.com/media/ALWsTtMzfjai4/source.gif"/&gt;
+&lt;/center&gt;
+
+---
+# Historial de versiones
+
+- Si usamos una plataforma como Dropbox contamos con un historial de archivos en caso de necesitarlo. 
+&lt;br&gt;
+--
+
+- O con Google Docs tenemos la opción de "version history" que viene a ser algo similar. 
+&lt;br&gt;
+--
+
+- Una ventaja de Google Docs respecto a Dropbox es que permite editar un mismo documento por varias personas a la vez.
+&lt;br&gt;
+--
+
+- Pero ninguno de estos métodos de control de versiones es lo suficientemente eficiente para almacenar y rastrear los cambios en el código.
+&lt;br&gt;
+--
+
+- Por ello, existen &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;programas específicos&lt;/span&gt; para el control de versiones, uno de los más populares es &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;git&lt;/span&gt;. 
+--
+
+- La gran ventaja de git es cómo gestiona los archivos. Los cambios no se almacenan al hacer "save" sino que es necesario hacer un "commit". Este commit refleja los cambios, la fecha en que se hizo y un mensaje sobre lo que se hizo.
+
+[Link](https://michaelstepner.com/blog/git-vs-dropbox/)
+
+---
+# Motivación para usar git
+
+
+- Es de &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;open source&lt;/span&gt; y &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;gratuito&lt;/span&gt;
+--
+
+- Permite la gestión de cambios en documentos, código, etc.
+--
+
+- Facilita el &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;trabajo colaborativo&lt;/span&gt; y simultáneo sin preocuparnos que alguien borre algo.
+--
+
+- La posibilidad de reportar errores (bugs) o sugerir nuevos aportes (features) a proyectos.
+--
+
+- Regresar a &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;versiones previas&lt;/span&gt;, si encontrás errores o borrás accidentalmente algo.  
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Ver los cambios&lt;/span&gt; entre diferentes versiones de tu código, análisis o texto.
+--
+
+- Compartir tus &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;paquetes de R&lt;/span&gt; e instalar los que se encuentran en desarrollo.
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;RStudio&lt;/span&gt; integra soporte para git por lo que se simplifica su uso.
+--
+
+- Comunmente se utiliza con un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;web service&lt;/span&gt; que aloja remotamente una copia de los archivos. Dos de los más utilizados son GitHub y Gitlab. 
+
+&lt;img src="https://media.giphy.com/media/kH6CqYiquZawmU1HI6/giphy.gif" width="10%" /&gt;
+
+
+---
+# git no es Gitlab
+
+- Hagamos una analogía entre git y el e-mail. 
+&lt;br&gt;&lt;br&gt;
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;E-mail&lt;/span&gt; es un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;protocolo para enviar mensajes online&lt;/span&gt;, independientemente de cual servidor de e-mail uses (gmail, hotmail, adinet, etc.).
+&lt;br&gt;&lt;br&gt;
+--
+
+- &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Git&lt;/span&gt; es un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;protocolo para compartir versiones de tu código&lt;/span&gt;, independientemente de cual servidor git uses (github, gitlab, bitbucket).
+&lt;br&gt;&lt;br&gt;
+--
+
+- Así &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;gitlab.com&lt;/span&gt; es a git lo que &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;gmail.com&lt;/span&gt; es al e-mail.
+&lt;br&gt;&lt;br&gt;
+--
+
+- [GitLab]((https://about.gitlab.com/)) es un webservice que te permite almacenar proyectos en un repositorio remoto gratuitamente. Tiene una interfaz amigable con varios agregados (lista de issues, wikis).
+&lt;br&gt;&lt;br&gt;
+--
+
+- Otros servicios similares son [GitHub](https://github.com/) o [bitbucket](https://bitbucket.org/). No todos tienen las mismas condiciones de servicios y están van cambiando. 
+
+---
+# Crear una cuenta en Gitlab
+
+
+&lt;img src="img/git/creatagitlabaccount.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Confirmar cuenta
+
+
+&lt;img src="img/git/confirmaccount.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Verificar instalación (en Terminal)
+
+.left-column[
+- RStudio proporciona acceso a la terminal del sistema operativo. 
+
+- El \$ es a la terminal lo que el prompt es a la consola de R.
+
+]
+
+.right-column[
+```git
+    git --version
+```
+
+&lt;img src="img/git/git_version.gif" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+# Pasos para configurar git en Rstudio
+
+1. Consultar en la &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Terminal&lt;/span&gt; donde está el ejecutable de git en la computadora.
+
+ - Windows: escribir `where git` y apretar enter. La ruta será algo como:  `C:/Program Files (x86)/Git/bin/git.exe`
+ - Linux/Mac: escribir `which git` + ENTER. La ruta será algo como: `/usr/bin/git`
+&lt;br&gt;&lt;br&gt;
+--
+
+2. Abrir RStudio e ir a &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Tools &amp;gt; Global Options&lt;/span&gt;
+--
+
+3. Hacer click en &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Git/SVN&lt;/span&gt; 
+--
+
+4. completar con la ruta de git 
+--
+
+5. **Seleccionar** &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Enable version control interface for RStudio projects&lt;/span&gt;.
+--
+
+6. Reiniciar RStudio y verificar el ícono de Git en la barra de herramientas superior.
+
+
+---
+# 
+
+&lt;img src="img/git/git_ejecutable.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+&lt;!-- ![](img/git/git_ejecutable.gif) --&gt;
+
+---
+# Configurar git
+
+- Cuando creé una cuenta de GitLab usé un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;nombre de usuaria&lt;/span&gt; y un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;e-mail&lt;/span&gt;, esta es la información que debo proporcionar en la terminal para configurar git.
+
+- Estos comandos que escribimos no son comandos de R sino que serán interpretados por nuestro sistema operativo para configurar git.
+
+```git
+    git config --global user.name "tu nombre"
+    git config --global user.email "tumail@domain.com"
+```
+
+- El paquete de R usethis permite configurar git desde la consola de R sin pasar por la terminal de sistema.
+
+---
+# Configurar Git (en la Terminal)
+
+&lt;img src="img/git/gitconfigrstudio.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# Ejercicio
+
+1. **En tu cuenta de GitLab crea un nuevo proyecto**
+&lt;br&gt;&lt;br&gt;
+--
+
+2. Dale al nuevo repositorio un nombre corto y descriptivo
+&lt;br&gt;&lt;br&gt;
+--
+
+3. Describe el proyecto
+&lt;br&gt;&lt;br&gt;
+--
+
+4. Selecciona la opción Private o Public según te parezca
+&lt;br&gt;&lt;br&gt;
+--
+
+5. Selecciona la opción inicializar el repositorio con un README   
+ 
+
+_En github los proyectos se llaman repositorios_
+
+
+
+---
+# 
+
+![](img/git/createagitlabproject.gif)
+
+---
+# Clonar el repositorio en RStudio con Git 
+
+1. Copiar la ruta (HTTPS url) del repositorio al clickear el botón _Clone or download_. 
+ La ruta será algo similar a `https://github.com/username/nombre_repo.git`. 
+&lt;br&gt;&lt;br&gt;
+--
+2. En RStudio Selecciona _File &gt; New Project.._
+&lt;br&gt;&lt;br&gt;
+--
+3. En _Version Control_, selecciona la opción _Git_
+ Estás creando un nuevo proyecto (.Rproj) en RStudio con control de versiones Git.
+&lt;br&gt;&lt;br&gt;
+--
+4. Pega la ruta HTTPS del repository, selecciona la carpeta del espacio de trabajo de R y crea el proyecto.
+&lt;br&gt;&lt;br&gt;
+--
+
+- RStudio entonces copia (clona) el contenido del repositorio a la carpeta del proyecto. 
+
+- El contenido del repositorio GitLab ahora debería aparecer en el panel Archivos de RStudio y debería ver allí el `README.md` creado.
+
+---
+# 
+![](img/git/clone.gif)
+
+
+&lt;!-- ![GitHub: Create a new repository](imagenes/GitHub-create-repo.png)  --&gt;
+---
+# Flujo de trabajo
+
+![Fuente: https://intro2r.com/use-git.html](img/git/workflow_git.png)
+
+*Fuente: https://intro2r.com/use-git.html*
+
+---
+# Flujo de trabajo
+
+1. &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Creas o modificas un archivo&lt;/span&gt; en tu directorio de trabajo
+&lt;br&gt;
+--
+
+2. &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Confirmas los cambios &lt;/span&gt; en la Staging Area (add).
+&lt;br&gt;
+--
+
+3. Haces &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;commit&lt;/span&gt; de esos cambios que quedan en el repositorio local (directorio Git), junto con un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;mensaje&lt;/span&gt; que indica lo que se ha hecho con el archivo.
+&lt;br&gt;
+--
+
+4. Envias los cambios (commits) a GitLab haciendo &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;push&lt;/span&gt;.
+&lt;br&gt;
+--
+
+- Los pasos 1 a 3 ocurren en tu computadora. Si estás trabajando con alguien más o usás más de una computadora, deberás descargar los cambios que hayan sido por esa otra persona desde GitLab haciendo pull.
+
+5- Descargas localmente los cambios registrados remotamente haciendo &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pull&lt;/span&gt;.
+--
+
+
+- Hacer commits seguido, con pequeños cambios y mensajes útiles, facilita el seguimiento de lo que estás haciendo.
+
+
+---
+# Terminología
+
+- El  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Working Directory&lt;/span&gt; (directorio de trabajo) es donde tus archivos están en tu computadora local.
+--
+
+- El  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Local Repository&lt;/span&gt; (repositorio local) es un subdirectorio del WD que reside en .git/. Es una carpeta oculta con toda la información necesaria para llevar el control de versiones.
+--
+
+- El  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Staging Area&lt;/span&gt; (área de ensayo) o Index se encuentra dentro del repositorio local 
+--
+
+- El  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Remote Repository&lt;/span&gt; (repositorio remoto) está alojado en gitlab.com.
+--
+
+- Para ver qué hay en la carpeta git puede mostrar las carpetas ocultas de tu directorio de trabajo o escribir en la terminal lo siguiente:
+
+```git
+cd .git 
+ls -a
+```
+
+---
+# Add + Commit + Push
+
+- Para enviar los cambios que realizamos localmente primero debemos &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;seleccionar los archivos&lt;/span&gt; modificados, creados o eliminados,
+--
+
+- Luego hacer &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;commit&lt;/span&gt; para lo cual es necesario escribir un mensaje que describa los cambios que realizamos. 
+--
+
+- Para que un &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;mensaje del commit&lt;/span&gt; nos resulte útil debe describir brevemente lo que hicimos y no haber hecho muchas cosas antes de hacer un commit. Podemos volver a una versión anterior del código y para saber a cuál resulta muy útil ese mensaje.
+--
+
+- Luego de hacer uno o varios commits debemos enviar los cambios al repositorio remoto: &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;presionar el botón push&lt;/span&gt; e ingresar los datos solicitados. 
+
+---
+# Ejemplo: Add + Commit + Push
+
+&lt;img src="img/git/commitandpush.gif" width="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Estado de archivos
+
+
+.pull-left[
+- Cada archivo tiene un estatus específico que va cambiando en el tiempo. 
+- En la pestaña Git, al lado del nombre  de un archivo hay un recuadro de color con una letra o signo.
+
+ ![](img/git/git_pestaña.png)
+ 
+ ]
+ .pull-right[
+-  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #fec44f !important;" &gt;?&lt;/span&gt; **Untracked**: son los archivos nuevos previo a clickear en Staged.
+-  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #99d8c9 !important;" &gt;A&lt;/span&gt; **Added**: son los archivos nuevos que comienzar a ser rastreados
+-  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #3182bd !important;" &gt;M&lt;/span&gt; **Modified**: un archivo que fue modificado
+-  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #810f7c !important;" &gt;R&lt;/span&gt; **Renamed**: un archivo que fue renombrado
+-  &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b30000 !important;" &gt;D&lt;/span&gt; **Deleted**: un archivo que fue eliminado
+
+En la columna _Staged_ se seleccionan las casillas de los archivos que queramos hacer _commit_. 
+El panel inferior muestra las ediciones en verde y rojo del archivo.
+ ]
+
+---
+# Cambios en gitlab luego del push
+
+&lt;img src="img/git/f5.gif" width="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Diferencias entre versiones
+
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #99d8c9 !important;" &gt;Additions&lt;/span&gt; 
+&lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b30000 !important;" &gt;Deletions&lt;/span&gt;
+
+&lt;img src="img/git/commitdif.gif" width="85%" style="display: block; margin: auto;" /&gt;
+
+---
+# Pull
+
+Descargar los cambios que otra persona o yo misma desde otra computadora realicé.
+
+&lt;img src="img/git/pull.gif" width="85%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# gitignore
+
+- gitignore es un archivo de texto que le dice a Git qué archivos o carpetas ignorar en un proyecto. 
+&lt;br&gt;&lt;br&gt;
+--
+
+- Estos archivos no serán enviados al repositorio remoto.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Conviene ignorar información sensible (contraseñas). Ver RStudioAPI y Keyring para gestionar contraseñas.
+&lt;br&gt;&lt;br&gt;
+--
+
+- También archivos binarios. Git funciona muy bien con archivos de texto (cualquier tipo de texto), pero no con archivos binarios como .Rdata.
+&lt;br&gt;&lt;br&gt;
+--
+
+- Ignorar archivos de más de 50MB. Git está hecho específicamente para el código (por ejemplo, .R).
+
+&lt;!-- cómo usar git https://intro2r.com/use-git.html --&gt;
+
+&lt;!-- - Las entradas de este archivo también pueden seguir un patrón coincidente. El asterisco se utiliza como una coincidencia comodín.  --&gt;
+&lt;!-- --     --&gt;
+
+---
+# Branches
+
+.pull-left[
+- Al hacer el primer commit en un nuevo repositorio se crea automáticamente la rama master.
+
+- La rama "master", es la rama por defecto. 
+
+- Las ramas se utilizan para hacer desarrollos aislados de la rama principal.
+
+- Luego pueden combinarse (merge). 
+
+]
+
+.pull-right[
+![](img/git/branch.png)
+*Fuente: https://bit.ly/3erssIf*
+
+]
+
+&lt;!-- https://aberdeenstudygroup.github.io/studyGroup/lessons/SG-T1-GitHubVersionControl/VersionControl/ --&gt;
+&lt;!-- https://intro2r.com/use-git.html --&gt;
+&lt;!-- https://carpentries-incubator.github.io/git-Rstudio-course/04-history/index.html --&gt;
+
+---
+# Ejercicio
+
+1. Clona el repositorio creado en GitLab en tu computadora.
+
+2. Agregar un script de R (el ejercicio 1 por ejemplo) que incluya un comentario y código.
+
+3. Envía los cambios al repositorio remoto.
+
+4. Comprueba que efectivamente quedaron los cambios en el repositorio remoto.
+
+5. Edita el README del proyecto (en GitLab).
+
+6. Descarga localmente los cambios hechos remotamente.
+
+
+---
+# Materiales para profundizar el tema
+
+- [Happy Git and GitHub for the useR. Jenny Bryan &amp; Jim Hester.](https://happygitwithr.com/)
+
+- [R Packages: Git and GitHub](https://r-pkgs.org/git.html)
+
+- [Version Control with Git and SVN. RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+
+- [Git book](https://git-scm.com/book/en/v2)
+
+- [GitHub Glossary](https://help.github.com/articles/github-glossary/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
