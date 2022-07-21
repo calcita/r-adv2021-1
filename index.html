@@ -4,6 +4,7 @@
     <title>Programación avanzada en R</title>
     <meta charset="utf-8" />
     <meta name="author" content="  Creative Commons Attribution 4.0 International License" />
+    <script src="index_files/header-attrs/header-attrs.js"></script>
     <script src="index_files/clipboard/clipboard.min.js"></script>
     <link href="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="index_files/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
@@ -14,12 +15,17 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Programación avanzada en R
-## Escuela de Invierno - Julio 2021 <br> Gabriela Mathieu
+]
+.subtitle[
+## Escuela de Invierno - Julio 2022 <br> Gabriela Mathieu
+]
+.author[
 ### <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+]
 
 ---
-
 
 
 
@@ -38,7 +44,7 @@ class: center, middle, inverse, title-slide
 
 - Crear una cuenta de GitLab
 
-- Configuración de git
+- Configuración de git en RStudio
 
 
 ---
@@ -50,19 +56,19 @@ class: hide-logo
 .left-column[
 &lt;br&gt;
 
-<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z"/></svg>
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M128 96h384v256h64v-272c0-26.38-21.62-48-48-48h-416c-26.38 0-48 21.62-48 48V352h64V96zM624 383.1h-608c-8.75 0-16 7.25-16 16v16c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.2 632.8 383.1 624 383.1z"/></svg>
 &lt;br&gt;&lt;br&gt;
 
-<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg>
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"/></svg>
 &lt;br&gt;&lt;br&gt;
 
-<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 320 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M204.3 32.01H96c-52.94 0-96 43.06-96 96c0 17.67 14.31 31.1 32 31.1s32-14.32 32-31.1c0-17.64 14.34-32 32-32h108.3C232.8 96.01 256 119.2 256 147.8c0 19.72-10.97 37.47-30.5 47.33L127.8 252.4C117.1 258.2 112 268.7 112 280v40c0 17.67 14.31 31.99 32 31.99s32-14.32 32-31.99V298.3L256 251.3c39.47-19.75 64-59.42 64-103.5C320 83.95 268.1 32.01 204.3 32.01zM144 400c-22.09 0-40 17.91-40 40s17.91 39.1 40 39.1s40-17.9 40-39.1S166.1 400 144 400z"/></svg>
 &lt;br&gt;&lt;br&gt;
 
-<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M0 64C0 28.65 28.65 0 64 0H224V128C224 145.7 238.3 160 256 160H384V448C384 483.3 355.3 512 320 512H64C28.65 512 0 483.3 0 448V64zM256 128V0L384 128H256z"/></svg>
 &lt;br&gt;&lt;br&gt;
 
-<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M416 192c0-88.4-93.1-160-208-160S0 103.6 0 192c0 34.3 14.1 65.9 38 92-13.4 30.2-35.5 54.2-35.8 54.5-2.2 2.3-2.8 5.7-1.5 8.7S4.8 352 8 352c36.6 0 66.9-12.3 88.7-25 32.2 15.7 70.3 25 111.3 25 114.9 0 208-71.6 208-160zm122 220c23.9-26 38-57.7 38-92 0-66.9-53.5-124.2-129.3-148.1.9 6.6 1.3 13.3 1.3 20.1 0 105.9-107.7 192-240 192-10.8 0-21.3-.8-31.7-1.9C207.8 439.6 281.8 480 368 480c41 0 79.1-9.2 111.3-25 21.8 12.7 52.1 25 88.7 25 3.2 0 6.1-1.9 7.3-4.8 1.3-2.9.7-6.3-1.5-8.7-.3-.3-22.4-24.2-35.8-54.5z"/></svg>
+<svg preserveAspectRatio="none" aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:2em;width:2em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#756bb1;overflow:visible;position:relative;"><path d="M416 176C416 78.8 322.9 0 208 0S0 78.8 0 176c0 39.57 15.62 75.96 41.67 105.4c-16.39 32.76-39.23 57.32-39.59 57.68c-2.1 2.205-2.67 5.475-1.441 8.354C1.9 350.3 4.602 352 7.66 352c38.35 0 70.76-11.12 95.74-24.04C134.2 343.1 169.8 352 208 352C322.9 352 416 273.2 416 176zM599.6 443.7C624.8 413.9 640 376.6 640 336C640 238.8 554 160 448 160c-.3145 0-.6191 .041-.9336 .043C447.5 165.3 448 170.6 448 176c0 98.62-79.68 181.2-186.1 202.5C282.7 455.1 357.1 512 448 512c33.69 0 65.32-8.008 92.85-21.98C565.2 502 596.1 512 632.3 512c3.059 0 5.76-1.725 7.02-4.605c1.229-2.879 .6582-6.148-1.441-8.354C637.6 498.7 615.9 475.3 599.6 443.7z"/></svg>
 
 ]
 
@@ -71,10 +77,10 @@ class: hide-logo
 Espacio "presencial": &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;20 horas&lt;/span&gt; de clases teóricas/prácticas
 &lt;br&gt;&lt;br&gt;
 
-[Webasignatura](https://webasignatura.ucu.edu.uy/course/view.php?id=6789) y [Slack](https://join.slack.com/t/programacinav-yrb6242/shared_invite/zt-t7merh74-YnvB_hva2POQOGByIQTObg)
+[Webasignatura](https://webasignatura.ucu.edu.uy/course/view.php?id=6789) 
 &lt;br&gt;&lt;br&gt;
 
-Participar durante la clase a través del &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;chat&lt;/span&gt; de zoom/slack o &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pedir la palabra&lt;/span&gt;.
+Participar durante la clase a través del &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;chat&lt;/span&gt; de zoom o &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;pedir la palabra&lt;/span&gt;.
 &lt;br&gt;&lt;br&gt;
 
 &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;Examen&lt;/span&gt; opcional
@@ -100,10 +106,13 @@ Participar durante la clase a través del &lt;span style=" font-weight: bold;   
 - Aprender &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;buenas prácticas&lt;/span&gt; de escribir código (R/RStudio), &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;trabajo colaborativo&lt;/span&gt; y &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;reproducibilidad&lt;/span&gt; del código.
 &lt;br&gt;
 
-- Aprender a escribir &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;funciones propias&lt;/span&gt; y documentarlas.
+- Aprender a escribir &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;funciones propias&lt;/span&gt;, testearlas y documentarlas.
 &lt;br&gt;
 
 - Aprender a usar el &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;control de versiones&lt;/span&gt; (Git/GitLab). 
+&lt;br&gt;
+
+- Desarrollar un paquete de R combinando todo lo anterior.
 &lt;br&gt;
 
 - Usaremos &lt;span style=" font-weight: bold;    border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #b3e2cd !important;" &gt;varios conjuntos de datos&lt;/span&gt; para abordar diferentes problemas.
@@ -149,8 +158,6 @@ Participar durante la clase a través del &lt;span style=" font-weight: bold;   
 Instalar las versiones más recientes de R (&gt;= 3.6.3), RStudio y Git
 
 .left-column[
-&lt;!-- 👍 --&gt;
-&lt;!-- 👎 --&gt;
 
 &lt;img src="img/r_logo.png" width="30%" /&gt;
 
@@ -403,57 +410,53 @@ background-size: 55px
 Creo un data frame con 3 vectores 
 
 ```r
-atleta &lt;- c("DÉBORAH RODRÍGUEZ", "EMILIANO LASA", "PÍA FERNÁNDEZ", "MIKAEL APRAHAMIÁN",
-            "NICOLE FRANK", "ENZO MARTÍNEZ", "BRUNO CETRARO", "FELIPE KLÜVER", "DOLORES MOREIRA",
-            "PABLO DEFAZIO", "DOMINIQUE KNÜPPEL")
+title &lt;- c("Forrest Gump", "Breaking Bad", "Stranger Things", "Taxi Driver")
 
-debut &lt;- c("29/7","31/7","01/8", "26/7", "26/7", "30/7", "23/7", "23/7", "25/7", "28/7", "28/7")
+year &lt;- c(1994, 2008, 2016, 1976)
 
-rio_jjoo &lt;- c(T, T, F, F, F, F, F, F, T, T, F)
+movie &lt;- c(T, F, F, T)
 
-df_uy &lt;- data.frame(atleta, debut, rio_jjoo)
+df &lt;- data.frame(title, year, movie)
 
-head(df_uy)
+head(df)
 ```
 
 ```
-             atleta debut rio_jjoo
-1 DÉBORAH RODRÍGUEZ  29/7     TRUE
-2     EMILIANO LASA  31/7     TRUE
-3     PÍA FERNÁNDEZ  01/8    FALSE
-4 MIKAEL APRAHAMIÁN  26/7    FALSE
-5      NICOLE FRANK  26/7    FALSE
-6     ENZO MARTÍNEZ  30/7    FALSE
+            title year movie
+1    Forrest Gump 1994  TRUE
+2    Breaking Bad 2008 FALSE
+3 Stranger Things 2016 FALSE
+4     Taxi Driver 1976  TRUE
 ```
 
 ---
 # Acceder a elementos de un data frame [, ]
 
 .pull-left[
-Accedo a los elementos de la primera columna ("atleta"):
+Accedo a los elementos de la primera columna ("title"):
 
 
 ```r
-df_uy[, 1]
-df_uy$atleta
-df_uy[,"atleta"]
-df_uy[["atleta"]]
+df[, 1]
+df$title
+df[,"title"]
+df[["title"]]
 ```
 
 ]
 .pull-right[
-Accedo al primer elemento de la primera columna ("atleta")
+Accedo al primer elemento de la primera columna ("title")
 
 ```r
-df_uy[1, 1]
-df_uy$atleta[1]
-df_uy[1,"atleta"]
-df_uy[["atleta"]][1]
+df[1, 1]
+df$title[1]
+df[1,"title"]
+df[["title"]][1]
 ```
 
 
 ```
-[1] "DÉBORAH RODRÍGUEZ"
+[1] "Forrest Gump"
 ```
 ]
 
@@ -467,39 +470,28 @@ background-size: 55px
 
 
 ```r
-evento &lt;- "JJOO Tokyo 2021"
-deporte &lt;- c("Atletismo", "Judo", "Natación",
-             "Remo", "Vela")
-lista_uy &lt;- list(df_uy, evento, deporte)
+streaming &lt;- "Netflix"
+
+lista &lt;- list(df, streaming)
 ```
 ]
 
 .pull-right[
 
 ```r
-lista_uy
+lista
 ```
 
 ```
 [[1]]
-              atleta debut rio_jjoo
-1  DÉBORAH RODRÍGUEZ  29/7     TRUE
-2      EMILIANO LASA  31/7     TRUE
-3      PÍA FERNÁNDEZ  01/8    FALSE
-4  MIKAEL APRAHAMIÁN  26/7    FALSE
-5       NICOLE FRANK  26/7    FALSE
-6      ENZO MARTÍNEZ  30/7    FALSE
-7      BRUNO CETRARO  23/7    FALSE
-8      FELIPE KLÜVER  23/7    FALSE
-9    DOLORES MOREIRA  25/7     TRUE
-10     PABLO DEFAZIO  28/7     TRUE
-11 DOMINIQUE KNÜPPEL  28/7    FALSE
+            title year movie
+1    Forrest Gump 1994  TRUE
+2    Breaking Bad 2008 FALSE
+3 Stranger Things 2016 FALSE
+4     Taxi Driver 1976  TRUE
 
 [[2]]
-[1] "JJOO Tokyo 2021"
-
-[[3]]
-[1] "Atletismo" "Judo"      "Natación"  "Remo"      "Vela"     
+[1] "Netflix"
 ```
 
 ]
@@ -526,25 +518,25 @@ background-size: 55px
 
 ```r
 # 1ro y 2do elemento de la lista
-lista_uy[1:2]
+lista[1:2]
 
 
-# 3er elemento de la lista
-lista_uy[3]
+# 2o elemento de la lista
+lista[2]
 
-# 3er elemento de la lista
-lista_uy[[3]]
+# 2o elemento de la lista
+lista[[2]]
 
-# 1er elemento del 3er elemento de la lista.
-lista_uy[[3]][1]
+# 1er elemento del 2o elemento de la lista.
+lista[[2]][1]
 
-lista_uy[[3]][[1]]
+lista[[2]][[1]]
 ```
 
 ]
 
 .pull-right[
-&lt;img src="img/intro/pepper_list.png" width="459" 200% /&gt;
+&lt;img src="img/intro/pepper_list.png" 200% /&gt;
 &lt;br&gt;&lt;br&gt;
 
 Fuente: https://goo.gl/8UkcHq
@@ -777,6 +769,7 @@ Uso la tecla `tab` para autocompletar una ruta
 
 &lt;img src="img/project/read_project.gif" width="60%" style="display: block; margin: auto;" /&gt;
 
+
 ---
 class: inverse, center, middle
 background-image: url("https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png")
@@ -850,9 +843,10 @@ background-size: 55px
 - Un programa de control de versiones mantiene una copia de los cambios. Esto es útil en caso de que necesitemos revertir algún cambio realizado.  
 
 ---
-# Final_final.doc
+# ¿Por qué usar un software de control de versiones?
 
 Probablemente ya has implementado un control de versiones en algún proyecto...
+Algo así rudimentario y caótico.
 
 &lt;img src="img/git/tesis.png" width="40%" style="display: block; margin: auto;" /&gt;
 
@@ -874,6 +868,8 @@ Probablemente ya has implementado un control de versiones en algún proyecto...
 &lt;center&gt;
 &lt;img src="https://media.giphy.com/media/ALWsTtMzfjai4/source.gif"/&gt;
 &lt;/center&gt;
+
+Git no es un repositorio para tus archivos
 
 ---
 # Historial de versiones
@@ -1301,6 +1297,7 @@ Descargar los cambios que otra persona o yo misma desde otra computadora realic�
 - [Git book](https://git-scm.com/book/en/v2)
 
 - [GitHub Glossary](https://help.github.com/articles/github-glossary/)
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -1350,6 +1347,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
